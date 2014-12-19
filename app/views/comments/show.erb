@@ -1,0 +1,7 @@
+<%= form_for [@video, @comment] do |f| %>
+  Comment: <%= f.text_field :description %><br>
+
+  <%= f.submit %>
+<% end %>  
+
+<%= link_to 'delete', [@video, @comment],method: :delete %>  

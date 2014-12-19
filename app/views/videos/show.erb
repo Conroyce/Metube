@@ -1,0 +1,24 @@
+<h2><%= @video.title %></h2>
+
+<%= link_to 'delete', @video, method: :delete %>
+
+<%= @video.description %>
+<iframe width="560" height="315" src="//www.youtube.com/embed/<%= @video.url %>" frameborder="0" allowfullscreen></iframe><br>
+
+
+<%= form_tag("/videos/#{@video.id}/comments", method: "post") do %>
+  <%= label_tag('comment[description]',"Add Comment:") %>
+  <%= text_field_tag('comment[description]') %>
+
+  <%= submit_tag("submit") %>   
+<% end %> 
+
+
+
+<% @video.comments.each do |x| %>
+  <a href="/videos/<%= x.video_id %>/comments/<%= x.id %>"><%= x.description %></a><br>
+<% end %>
+  
+
+ 
+
