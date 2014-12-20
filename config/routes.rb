@@ -21,9 +21,13 @@ Rails.application.routes.draw do
   #   resources :comments
   # end
 
-  resources :videos, only: [:index, :create, :show, :update, :destroy] do
+  resources :videos, only: [:index, :create, :show, :update, :destroy, :edit] do
     resources :comments, only: [:index, :create, :show, :update, :destroy]
+
   end
+
+  resources :playlists 
+     
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

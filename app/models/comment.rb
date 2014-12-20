@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
   validates :description, presence: true
-  belongs_to :video
+  has_many :playlists
+  has_many :videos, through: :playlists
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141218014917) do
+ActiveRecord::Schema.define(version: 20141219231606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,25 @@ ActiveRecord::Schema.define(version: 20141218014917) do
   end
 
   add_index "comments", ["video_id"], name: "index_comments_on_video_id", using: :btree
+
+  create_table "playlist_vids", force: true do |t|
+    t.integer  "video_id"
+    t.integer  "playlist_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "playlist_vids", ["playlist_id"], name: "index_playlist_vids_on_playlist_id", using: :btree
+  add_index "playlist_vids", ["video_id"], name: "index_playlist_vids_on_video_id", using: :btree
+
+  create_table "playlists", force: true do |t|
+    t.string   "title"
+    t.integer  "comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "playlists", ["comment_id"], name: "index_playlists_on_comment_id", using: :btree
 
   create_table "videos", force: true do |t|
     t.string   "title"

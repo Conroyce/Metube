@@ -21,6 +21,9 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])  
   end 
 
+  def edit
+  end  
+
   def update
     @comment = Comment.update(params[:id],description: params[:comment][:description])
     redirect_to "/videos/#{@comment.video_id}"

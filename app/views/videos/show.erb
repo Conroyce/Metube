@@ -1,4 +1,4 @@
-<h2><%= @video.title %></h2>
+<h2><%= @video.title %></h2><%= link_to 'edit', edit_video_path(@video) %>
 
 <%= link_to 'delete', @video, method: :delete %>
 

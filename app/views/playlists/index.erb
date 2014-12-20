@@ -1,0 +1,9 @@
+<%= form_for @play do |f| %>
+  Title: <%= f.text_field :title %>
+    
+  <%= f.submit %>
+<% end %>  
+
+<%= @playlists.each do |x| %>
+  <a href="/playlists/<%= x.id %>"><%= x.title %><br>
+<% end %>  

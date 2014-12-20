@@ -1,12 +1,13 @@
 
 
 class VideosController < ApplicationController
+
   def index
     @videos = Video.all
   end  
 
   def create
-    @video = Video.create(video_create)
+    @video = Video.create(video_params)
     redirect_to '/videos'
   end 
 
@@ -19,11 +20,13 @@ class VideosController < ApplicationController
   end 
 
   def edit
-
+    @video = Video.find(params[:id])
   end
 
   def update
-    @video = Video.update(params)
+    @video = Video.find(params[:id])
+    @video.update(video_params)
+    redirect_to "/videos/#{@video.id}"
   end 
 
   def destroy
@@ -31,7 +34,7 @@ class VideosController < ApplicationController
     redirect_to "/videos"
   end 
 
-  def video_create
+  def video_params
     params.require(:video).permit(:title,:url,:description)
   end 
 end

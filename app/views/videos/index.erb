@@ -6,6 +6,8 @@
     <input type="submit">
   </form><br> -->  
 
+<%= link_to "playlists", playlists_path %>
+
 <%= form_tag("/videos", method: "post") do %>
   <%= label_tag('video[title]','Title:') %>
   <%= text_field_tag('video[title]') %><br>
