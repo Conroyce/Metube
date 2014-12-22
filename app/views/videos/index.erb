@@ -8,6 +8,8 @@
 
 <%= link_to "playlists", playlists_path %>
 
+<h3>Add Song</h3>
+
 <%= form_tag("/videos", method: "post") do %>
   <%= label_tag('video[title]','Title:') %>
   <%= text_field_tag('video[title]') %><br>

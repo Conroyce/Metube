@@ -19,24 +19,22 @@
 
 <%= @playArr.each do |vid| %>
   <h3><%= vid.title %></h3><br> 
-  <iframe width="560" height="315" src="//www.youtube.com/embed/<%= vid.url %>" frameborder="0" allowfullscreen></iframe><br>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= vid.url %>" frameborder="0" allowfullscreen></iframe><br>
 
   <%= vid.comments.each do |x| %>
     <% if (x.description.empty?) %>
     <% else %>
       <%= x.decription %>
     <% end %> 
+  <% end %> 
 
-    <%= form_for @comment do |f| %>
-      <%= lab
+  <%= form_tag("/playlists/#{@playlist.id}", method: "post") do %>
+    <%= label_tag('comment[description]',"Add Comment:") %>
+    <%= text_field_tag('comment[description]') %>
 
-    <%= form_tag("/playlists/#{@playlist.id}", method: "post") do %>
-      <%= label_tag('comment[description]',"Add Comment:") %>
-      <%= text_field_tag('comment[description]') %>
-
-      <%= submit_tag("submit") %>   
-    <% end %> 
-  <% end %>
+    <%= submit_tag("submit") %>   
+  <% end %> 
+  
 <% end %>  
 
 

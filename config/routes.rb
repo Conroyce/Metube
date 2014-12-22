@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   #   resources :comments
   # end
 
-  resources :videos, only: [:index, :create, :show, :update, :destroy, :edit] do
-    resources :comments, only: [:index, :create, :show, :update, :destroy]
+  resources :videos do
+    resources :comments
 
   end
 

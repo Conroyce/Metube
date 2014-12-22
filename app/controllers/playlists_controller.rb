@@ -10,16 +10,13 @@ class PlaylistsController < ApplicationController
   end  
 
   def show
-    
+    puts "hi there"
     @playlist = Playlist.find(params[:id])
-    binding.pry
     @playArr = []
     @playlist.video_ids.each do |x|
       @vid = Video.find(x)    
       @playArr.push(@vid)
     end
-
-    puts "hi there"
   end  
 
   def destroy
