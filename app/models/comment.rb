@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
   validates :description, presence: true
-  has_many :playlists
-  has_many :videos, through: :playlists
+  belongs_to :commentable, polymorphic:true
+  has_many :comments, :as => :commentable
 end

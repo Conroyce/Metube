@@ -8,9 +8,21 @@ class CommentsController < ApplicationController
   end  
 
   def create
-    params['comment']['video_id'] = params['video_id']
+    par = ""
+    if (params["playlist_id"])
+      par = "playlist_id"
+    elsif (params["video_id"])
+      par = "video_id"
+    end
+    
+    params['comment'][par] = params[par] #par = 'video_id' 
     @comment = Comment.create(comment_create)
-    redirect_to "/videos/#{@comment.video_id}"
+    
+    if (par == "playlist_id")
+      redirect_to "/playlists/#{@comment['playlist_id']}"
+    elsif(par == "video_id")
+      redirect_to "/videos/#{@comment['video_id']}"
+    end
   end  
 
   def new
@@ -25,23 +37,47 @@ class CommentsController < ApplicationController
   end  
 
   def update
-    @comment = Comment.update(params[:id],description: params[:comment][:description])
-    redirect_to "/videos/#{@comment.video_id}"
+    @comment = Comment.update(params[:id],description: params[@name][:description]) #:comment
+    if (@par == "playlist_id")
+      redirect_to "/playlists/#{@comment['playlist_id']}"
+    elsif(@par == "video_id")
+      redirect_to "/videos/#{@comment['video_id']}"
+    end  
   end  
 
-  def comment_create
-    params['comment']['video_id'] = params['video_id']
-    params.require(:comment).permit(:description, :video_id)
+  def comment_create 
+    par = ""
+    if (params["playlist_id"]) 
+      par = "playlist_id"
+      name = :playlist
+    elsif (params["video_id"])
+      par = "video_id"
+      name = :playlist
+    end  
+    params['comment'][par] = params[par]
+    params.require(:comment).permit(:description, name, :commentable_id, :commentable_type)
   end 
 
   def destroy
     @comment = Comment.delete(params[:id])
-    redirect_to "/videos/#{params[:video_id]}"
+    if (@par == "playlist_id")
+      redirect_to "/videos/#{params[:playlist_id]}"
+    elsif (@par == "video_id")  
+      redirect_to "/videos/#{params[:video_id]}"
+    end  
   end  
 
   private
 
   def set_video
-    @video = Video.find(params[:video_id])
+    if (params[:video_id])
+      @video = Video.find(params[:video_id])
+      @par = "playlist_id"
+      @name = :playlist
+    elsif (params[:playlist_id]) 
+      @playlist = Playlist.find(params[:playlist_id])
+      @par = "video_id"
+      @name = :video
+    end 
   end  
 end

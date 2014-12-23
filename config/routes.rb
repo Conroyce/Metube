@@ -21,12 +21,10 @@ Rails.application.routes.draw do
   #   resources :comments
   # end
 
-  resources :videos do
+  resources :videos, :playlists do
     resources :comments
 
-  end
-
-  resources :playlists 
+  end 
      
 
   # The priority is based upon order of creation: first created -> highest priority.

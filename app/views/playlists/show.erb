@@ -27,17 +27,21 @@
       <%= x.decription %>
     <% end %> 
   <% end %> 
-
-  <%= form_tag("/playlists/#{@playlist.id}", method: "post") do %>
-    <%= label_tag('comment[description]',"Add Comment:") %>
-    <%= text_field_tag('comment[description]') %>
-
-    <%= submit_tag("submit") %>   
-  <% end %> 
   
 <% end %>  
 
 
+<%= form_tag("/playlists/#{@playlist.id}/comments", method: "post") do %>
+    <%= label_tag('comment[description]',"Add Comment:") %>
+    <%= text_field_tag('comment[description]') %>
+
+    <%= hidden_field_tag('comment[commentable_id]',"#{@playlist.id}") %>
+    <%= hidden_field_tag('comment[commentable_type]','Playlist') %>
+
+    <%= submit_tag("Add Comment") %>   
+<% end %> 
+
+<%= link_to "View Comments", @comment %>
 
 
 
