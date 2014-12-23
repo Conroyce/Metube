@@ -10,13 +10,14 @@ class PlaylistsController < ApplicationController
   end  
 
   def show
-    
     @playlist = Playlist.find(params[:id])
     @playArr = []
     @playlist.video_ids.each do |x|
       @vid = Video.find(x)    
       @playArr.push(@vid)
     end
+
+    @comments = Comment.where("commentable_id = #{params[:id]}")
     puts "hi there"
   end  
 

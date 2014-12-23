@@ -10,13 +10,16 @@
   <%= label_tag('comment[description]',"Add Comment:") %>
   <%= text_field_tag('comment[description]') %>
 
+  <%= hidden_field_tag('comment[commentable_id]',"#{@video.id}") %>
+  <%= hidden_field_tag('comment[commentable_type]',"Video") %>
+
   <%= submit_tag("submit") %>   
 <% end %> 
 
 
 
-<% @video.comments.each do |x| %>
-  <a href="/videos/<%= x.video_id %>/comments/<%= x.id %>"><%= x.description %></a><br>
+<% @comments.each do |x| %>
+  <a href="/videos/<%= x.commentable_id %>/comments/<%= x.id %>"><%= x.description %></a><br>
 <% end %>
   
 

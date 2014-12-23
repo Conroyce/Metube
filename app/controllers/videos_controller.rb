@@ -17,6 +17,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    @comments = Comment.where("commentable_id = #{params[:id]}")
   end 
 
   def edit

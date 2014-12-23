@@ -14,14 +14,14 @@ class CommentsController < ApplicationController
     elsif (params["video_id"])
       par = "video_id"
     end
-    
+              #NEED TO FIND WAY TO DISPLAY COMMENTS(PROLLY USE FIND/FIND_BY METHOD)
     params['comment'][par] = params[par] #par = 'video_id' 
     @comment = Comment.create(comment_create)
     
     if (par == "playlist_id")
-      redirect_to "/playlists/#{@comment['playlist_id']}"
+      redirect_to "/playlists/#{params['playlist_id']}"
     elsif(par == "video_id")
-      redirect_to "/videos/#{@comment['video_id']}"
+      redirect_to "/videos/#{params['video_id']}"
     end
   end  
 
