@@ -8,7 +8,7 @@ class VideosController < ApplicationController
 
   def create
     @video = Video.create(video_params)
-    redirect_to '/videos'
+    redirect_to '/videos/#{@video.id}'
   end 
 
   def new
@@ -16,6 +16,7 @@ class VideosController < ApplicationController
   end 
 
   def show
+    binding.pry
     @video = Video.find(params[:id])
     @comments = Comment.where("commentable_id = #{params[:id]}")
   end 
