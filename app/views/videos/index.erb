@@ -8,9 +8,15 @@
 
 <%= link_to "playlists", playlists_path %>
 
-<%= link_to "Sign Up", users_path %><br>
 
-<%= link_to "Log In", log_in_path %> 
+
+<% if (session[:user_id]) %>
+  Welcome, <%= @user.name %>!
+  <%= link_to "Sign Out", log_out_path %>
+<% else %>  
+  <%= link_to "Sign Up", users_path %><br>
+  <%= link_to "Log In", log_in_path %> 
+<% end %>
 
 <h3>Add Song</h3>
 

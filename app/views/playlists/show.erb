@@ -17,7 +17,7 @@
   <%= f.submit %>
 <% end %>  
 
-<%= @playArr.each do |vid| %>
+<% @playArr.each do |vid| %>
   <h3><%= vid.title %></h3><br> 
   <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= vid.url %>" frameborder="0" allowfullscreen></iframe><br>
 
@@ -35,7 +35,7 @@
 <% end %> 
 
 <h3>Comments</h3>
-<%= @comments.each do |comment| %>
+<% @comments.each do |comment| %>
   <%= comment.description %><br>
 <% end %>  
 

@@ -3,6 +3,10 @@
 class VideosController < ApplicationController
 
   def index
+    if (session[:user_id])
+      @user = User.find(session[:user_id])
+    else  
+    end  
     @videos = Video.all
   end  
 

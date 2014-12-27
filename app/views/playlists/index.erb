@@ -4,6 +4,12 @@
   <%= f.submit %>
 <% end %>  
 
-<%= @playlists.each do |x| %>
-  <a href="/playlists/<%= x.id %>"><%= x.title %><br>
+<% if (@playlist) %>
+  <% @playlist.each do |playlist| %>
+    <a href="/playlists/<%= playlist.id %>"><%= playlist.title %></a>
+  <% end %>  
+<% else %>
+  <% @playlists.each do |x| %>
+    <a href="/playlists/<%= x.id %>"><%= x.title %><br>
+  <% end %>  
 <% end %>  

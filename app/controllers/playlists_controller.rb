@@ -1,11 +1,26 @@
 class PlaylistsController < ApplicationController
   def index
-    @playlists = Playlist.all
+    if (session[:user_id])
+      @user = User.find(session[:user_id])
+      @playlist = @user.playlists
+    else   
+      @playlists = Playlist.all
+    end  
     @play = Playlist.new
   end  
 
   def create 
-    @playlist = Playlist.create(playlist_params)
+    # if (session[:user_id])
+    #   @playlist = Playlist.create(params.require(:playlist).permit(:title, video_ids:[], :user_id))
+    # else  
+      if (session[:user_id])
+        par = playlist_params
+        par["user_id"] = "#{session[:user_id].to_s} #{params[:title].to_s}"
+        @playlist = Playlist.create(par)
+      else 
+        @playlist = Playlist.create(playlist_params)
+      end  
+     
     redirect_to "/playlists"
   end  
 
@@ -35,7 +50,7 @@ class PlaylistsController < ApplicationController
 
   private
     def playlist_params
-      params.require(:playlist).permit(:title, video_ids:[])
+      params.require(:playlist).permit(:title, :user_id, video_ids:[]) #could cause an error
     end
 
     def playlist_vid_params
