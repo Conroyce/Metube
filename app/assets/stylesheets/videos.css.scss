@@ -21,7 +21,7 @@ body {
   box-sizing:border-box;
   color:#333;
   min-height:100vh; 
-
+  max-height:500vh;
 }
 a {
   text-decoration:none;
@@ -40,9 +40,8 @@ input {
 }
 .content {
   box-sizing:border-box;
-  padding-top:20px;
-  background-color:#eee;
-  margin-top:20px;
+  padding-top:0px;
+  margin-top:0px;
   clear:both;
 }
 .grid-6{
@@ -60,6 +59,7 @@ input {
   border-radius:5px;
   margin-bottom:7px;
 }
+
 .button a{
   color: white;
 }
@@ -69,9 +69,22 @@ input {
 .song-title{
   margin-top:25%;
 }
-
-
-
+.content h3:nth-child(even) {
+  background-color:#ddd;
+  height:40px;
+  box-sizing:border-box;
+  padding-top:10px;
+  margin:0;
+}
+.content h3:hover {
+  background-color:#eee
+}
+.song-title {
+  margin-bottom: 20px;
+}
+.cover {
+  background-color:#999;
+}
 
 
 

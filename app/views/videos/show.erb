@@ -1,6 +1,8 @@
-<h2><%= @video.title %></h2><%= link_to 'edit', edit_video_path(@video) %>
+<h2><%= @video.title %></h2><br>
 
-<%= link_to 'delete', @video, method: :delete %>
+<%= link_to 'edit', edit_video_path(@video) %>
+
+<%= link_to 'delete', @video, method: :delete %><br>
 
 <%= @video.description %>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @video.url %>" frameborder="0" allowfullscreen></iframe><br>
