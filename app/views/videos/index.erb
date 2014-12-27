@@ -5,35 +5,39 @@
     <input type="input" id="description" placeholder="Enter Description"><br>
     <input type="submit">
   </form><br> -->  
+<div class="grid-6">
+  <div class="space-top"><h3><%= link_to "Playlists", playlists_path %></h3></div><br>
 
-<%= link_to "playlists", playlists_path %>
+  <% if (session[:user_id]) %>
+    Welcome, <%= @user.name %>!
+    <div class="button"><%= link_to "Sign Out", log_out_path %></div>
+  <% else %>  
+    <div class="button"><%= link_to "Sign Up", users_path %></div>
+    <div class="button"><%= link_to "Log In", log_in_path %></div> 
+  <% end %>
+</div>
 
+<div class="grid-6">
+  <h3>Add Song</h3>
 
+  <%= form_tag("/videos", method: "post",class: "addSong-video") do %>
+    <%= label_tag('video[title]','Title:') %>
+    <%= text_field_tag('video[title]') %><br>
 
-<% if (session[:user_id]) %>
-  Welcome, <%= @user.name %>!
-  <%= link_to "Sign Out", log_out_path %>
-<% else %>  
-  <%= link_to "Sign Up", users_path %><br>
-  <%= link_to "Log In", log_in_path %> 
-<% end %>
+    <%= label_tag('video[description]',"Description:") %>
+    <%= text_field_tag('video[description]') %><br>
 
-<h3>Add Song</h3>
+    <%= label_tag('video[url]',"Youtube ID:") %>
+    <%=text_field_tag('video[url]') %><br>
 
-<%= form_tag("/videos", method: "post") do %>
-  <%= label_tag('video[title]','Title:') %>
-  <%= text_field_tag('video[title]') %><br>
+    <%= submit_tag("submit") %>
+  <% end %>  
+</div>
 
-  <%= label_tag('video[description]',"Description:") %>
-  <%= text_field_tag('video[description]') %><br>
+<h2 class="song-title">Songs</h2>
+<div class="content">
 
-  <%= label_tag('video[url]',"Youtube ID:") %>
-  <%=text_field_tag('video[url]') %><br>
-
-  <%= submit_tag("submit") %>
-<% end %>  
-
-
-<% @videos.each do |vid| %>
-  <h3><a href="/videos/<%= vid.id %>"><%= vid.title %></a></h3><br>
-<% end %> 
+  <% @videos.each do |vid| %>
+    <h3><a href="/videos/<%= vid.id %>"><%= vid.title %></a></h3><br>
+  <% end %>
+</div>   
