@@ -6,10 +6,10 @@
 
 <% if (@playlist) %>
   <% @playlist.each do |playlist| %>
-    <a href="/playlists/<%= playlist.id %>"><%= playlist.title %></a>
+    <a href="/playlists/<%= playlist.id %>"><%= playlist.title %></a><br>
   <% end %>  
 <% else %>
   <% @playlists.each do |x| %>
-    <a href="/playlists/<%= x.id %>"><%= x.title %><br>
+    <a href="/playlists/<%= x.id %>"><%= x.title %></a><br>
   <% end %>  
 <% end %>  

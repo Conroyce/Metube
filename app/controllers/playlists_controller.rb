@@ -10,9 +10,6 @@ class PlaylistsController < ApplicationController
   end  
 
   def create 
-    # if (session[:user_id])
-    #   @playlist = Playlist.create(params.require(:playlist).permit(:title, video_ids:[], :user_id))
-    # else  
       if (session[:user_id])
         par = playlist_params
         par["user_id"] = "#{session[:user_id].to_s} #{params[:title].to_s}"
@@ -26,14 +23,16 @@ class PlaylistsController < ApplicationController
 
   def show
     @playlist = Playlist.find(params[:id])
+    if (session[:user_id])
+      @comments = Comment.where("user_id = #{session[:user_id]}")
+    else      
+      @comments = Comment.where("commentable_id = #{params[:id]}")  
+    end  
     @playArr = []
     @playlist.video_ids.each do |x|
       @vid = Video.find(x)    
       @playArr.push(@vid)
-    end
-
-    @comments = Comment.where("commentable_id = #{params[:id]}")
-    puts "hi there"
+    end  
   end  
 
   def destroy

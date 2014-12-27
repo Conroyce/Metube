@@ -36,7 +36,7 @@
 
 <h3>Comments</h3>
 <% @comments.each do |comment| %>
-  <%= comment.description %><br>
+  <a href="<%= @playlist.id %>/comments/<%= comment.id %>"><%= comment.description %></a><br>
 <% end %>  
 
 

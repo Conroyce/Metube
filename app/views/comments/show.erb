@@ -1,7 +1,18 @@
-<%= form_for [@video, @comment] do |f| %>
-  Comment: <%= f.text_field :description %><br>
+<% if(@video) %>
+  <%= form_for [@video, @comment] do |f| %>
+    Comment: <%= f.text_field :description %><br>
 
-  <%= f.submit %>
+    <%= f.submit %>
+  <% end %>  
+
+  <%= link_to 'delete', [@video, @comment],method: :delete %>  
+
+<% elsif (@playlist) %>
+  <%= form_for [@playlist, @comment] do |f| %>
+    Comment: <%= f.text_field :description %><br>
+
+    <%= f.submit %>
+  <% end %>
+
+  <%= link_to 'delete', [@playlist, @comment], method: :delete %>
 <% end %>  
-
-<%= link_to 'delete', [@video, @comment],method: :delete %>  
